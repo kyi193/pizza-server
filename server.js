@@ -9,7 +9,7 @@ const config = require('./webpack.config.js');
 const { query } = require('express');
 
 const isDeveloping = process.env.NODE_ENV !== 'production';
-const port = isDeveloping ? 5000 : process.env.PORT;
+const port = process.env.PORT;
 const app = express();
 
 app.get('/api/getPizzas', function (req, res) {
