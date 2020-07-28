@@ -7,10 +7,13 @@ const webpackMiddleware = require('webpack-dev-middleware');
 const webpackHotMiddleware = require('webpack-hot-middleware');
 const config = require('./webpack.config.js');
 const { query } = require('express');
+const cors = require('cors');
 
 const isDeveloping = process.env.NODE_ENV !== 'production';
 const port = process.env.PORT;
 const app = express();
+
+app.use(cors());
 
 app.get('/api/getPizzas', function (req, res) {
   queryHelper()
