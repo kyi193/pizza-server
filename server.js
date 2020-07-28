@@ -1,22 +1,27 @@
 /* eslint no-console: 0 */
-
+const queryHelper = require('./src/queryHelper')
 const path = require('path');
 const express = require('express');
 const webpack = require('webpack');
 const webpackMiddleware = require('webpack-dev-middleware');
 const webpackHotMiddleware = require('webpack-hot-middleware');
 const config = require('./webpack.config.js');
+const { query } = require('express');
 
 const isDeveloping = process.env.NODE_ENV !== 'production';
 const port = isDeveloping ? 5000 : process.env.PORT;
 const app = express();
 
 app.get('/api/getPizzas', function (req, res) {
-  const json = {
-    joe: 3,
-    harry: 2
-  }
-  res.json(json)
+  queryHelper()
+    .then(result => {
+      const { data, errors, extensions } = result;
+      res.json(data)
+      //GraphQL errors and extensions are optional
+    })
+    .catch(error => {
+      console.log("Error", error)
+    });
 })
 
 if (isDeveloping) {
