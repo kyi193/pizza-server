@@ -15,8 +15,9 @@ const app = express();
 
 app.use(cors());
 
-app.get('/api/getPizzas', function (req, res) {
-  queryHelper()
+app.get('/api/getRestaurants/:zipCode', function (req, res) {
+  const zipCode = req.params.zipCode
+  queryHelper(zipCode)
     .then(result => {
       const { data, errors, extensions } = result;
       res.json(data)

@@ -5,9 +5,9 @@ const createApolloFetch = apolloFetch.createApolloFetch
 const uri = 'https://api.yelp.com/v3/graphql';
 const apiKey = process.env.YELP_API_TOKEN
 
-const query = `
-query searchPlace{
-  search(term: "pizza", location:"10001",  radius: 8000, sort_by: "rating", limit: 20) {
+const getQuery = (zipCode) => {
+  return `query searchPlace{
+  search(term: "pizza", location:"${zipCode}",  radius: 8000, sort_by: "rating", limit: 20) {
     business{
       name
       id
@@ -15,9 +15,10 @@ query searchPlace{
   }
 }
 `
-
-const queryHelper = function () {
+}
+const queryHelper = function (zipCode) {
   const apolloFetch = createApolloFetch({ uri });
+  const query = getQuery(zipCode)
 
   apolloFetch.use(({ request, options }, next) => {
     if (!options.headers) {
