@@ -1,5 +1,6 @@
 /* eslint no-console: 0 */
 const queryHelper = require('./src/queryHelper')
+const detailedRestaurantQueryHelper = require('./src/detailedRestaurantQueryHelper')
 const path = require('path');
 const express = require('express');
 const webpack = require('webpack');
@@ -18,6 +19,19 @@ app.use(cors());
 app.get('/api/getRestaurants/:zipCode', function (req, res) {
   const zipCode = req.params.zipCode
   queryHelper(zipCode)
+    .then(result => {
+      const { data, errors, extensions } = result;
+      res.json(data)
+      //GraphQL errors and extensions are optional
+    })
+    .catch(error => {
+      console.log("Error", error)
+    });
+})
+
+app.get('/api/detailedPage/:id', function (req, res) {
+  const id = req.params.id
+  detailedRestaurantQueryHelper(id)
     .then(result => {
       const { data, errors, extensions } = result;
       res.json(data)
