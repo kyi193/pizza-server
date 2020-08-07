@@ -19,7 +19,14 @@ const getQuery = (id) => {
         postal_code,
         country
       },
-      price
+      price,
+      photos,
+      reviews(limit: 3) {
+        user {
+          name
+        },
+        text
+      }
     }
   }
 `
