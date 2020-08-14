@@ -42,6 +42,10 @@ app.get('/api/detailedPage/:id', function (req, res) {
     });
 })
 
+app.get('/', (req, res) => {
+  return res.send('Server pinged');
+});
+
 if (isDeveloping) {
   const compiler = webpack(config);
   const middleware = webpackMiddleware(compiler, {
