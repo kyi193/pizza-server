@@ -52,7 +52,7 @@
     "extract-text-webpack-plugin": "^0.8.2",
     "html-webpack-plugin": "^1.6.1",
     "jscs": "^2.1.1",
-    "jsdom": "^6.5.1",
+    "jsdom": "^16.5.0",
     "json-loader": "^0.5.3",
     "mocha": "^2.3.3",
     "mocha-jsdom": "^1.0.0",
